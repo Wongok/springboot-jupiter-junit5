@@ -25,14 +25,29 @@ public class JUnit5Tests {
         logger.info("@BeforeEach - executes before each test method in this class");
     }
 
-    @Test
-    @DisplayName("Check Run Order of the Before")   // Defining the name of a class or method
-    void test() {
-        logger.info("BeforeAll -> BeforeEach");
+    // A method with an annotation runs after all test methods of the current class.
+    // static
+    // == @AfterClass (junit4)
+    @AfterAll
+    static void cleanUp() {
+        logger.info("@AfterAll - executed after all test methods.");
+    }
+
+    // A method with annotation runs after each test method.
+    // == @After (junit4)
+    @AfterEach
+    void cleanUpEach() {
+        logger.info("@AfterEach - executed after each test methods.");
     }
 
     @Test
-    @Disabled("Not implemented yet")
+    @DisplayName("Check Run Order of the Before")   // Defining the name of a class or method
+    void test() {
+        logger.info("BeforeAll -> BeforeEach -> AfterEach -> AfterAll");
+    }
+
+    @Test
+    @Disabled("Not implemented yet")    // == @Ignore (junit4)
     void testDisabled() {
     }
 }
