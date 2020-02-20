@@ -6,8 +6,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class DynamicTests {
@@ -29,5 +32,12 @@ public class DynamicTests {
                 DynamicTest.dynamicTest("Multiply Test",
                         () -> assertEquals(4, Math.multiplyExact(2, 2))))
                 .iterator();
+    }
+
+    @TestFactory
+    Stream<DynamicTest> dynamicTestsFromIntStream() {
+        return IntStream.iterate(0, n -> n + 2).limit(10)
+                .mapToObj(n -> DynamicTest.dynamicTest("test" + n,
+                        () -> assertTrue(n % 2 == 0)));
     }
 }
