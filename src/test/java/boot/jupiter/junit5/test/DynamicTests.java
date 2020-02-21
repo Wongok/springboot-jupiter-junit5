@@ -15,6 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 public class DynamicTests {
 
+    // @TestFactory method for dynamic testing.
+    // @TestFactory method should not be static, private
+    // return Iterable, Iterator, Collection, Stream
     @TestFactory
     Iterable<DynamicTest> dynamicTestsWithIterable() {
         return Arrays.asList(
