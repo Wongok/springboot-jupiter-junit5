@@ -11,4 +11,10 @@ public class ParameterResolverExample {
     void testinfo(TestInfo testInfo) {
         System.out.println(testInfo.getDisplayName());
     }
+
+    @RepeatedTest(10)
+    @DisplayName("RepetitionInfo Injection")
+    void testinfo(RepetitionInfo repetitionInfo) {
+        System.out.println(repetitionInfo.getCurrentRepetition() + " of " + repetitionInfo.getTotalRepetitions());
+    }
 }
